@@ -1,10 +1,12 @@
 module EmailAuth
   class FindsOrCreatesUser 
-    user = User.find_or_create_by(
-      email: email.strip.downcase
-    )
-    if user.persisted? 
-
+    def find_or_create_by_email(email)
+      user = User.find_or_create_by(
+        email: email.strip.downcase
+      )
+      if user.persisted? 
+        user
+      end
     end
   end
 end
