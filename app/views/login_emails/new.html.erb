@@ -1,0 +1,5 @@
+<%= form_with url: login_email_path do |f| %>
+  <%= f.hidden_field :redirect_path, value: @redirect_path %>
+  <%= f.email_field :email, placeholder: "human@example.com" %>
+  <%= f.submit "Send Login Link" %>
+<% end %>
