@@ -1,4 +1,4 @@
-class LoginEmailsController < ApplicationController 
+class SessionsController < ApplicationController 
   logged_out_users_welcome!
 
   def new 
