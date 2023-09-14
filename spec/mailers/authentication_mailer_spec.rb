@@ -21,15 +21,15 @@ RSpec.describe AuthenticationMailer, type: :mailer do
 
     plaintext_body = email.text_part.body.to_s
     html_body = email.html_part.body.to_s
-    # require 'pry'; binding.pry
+    
     expect(plaintext_body).to have_content("Hey there, doot@doot.com!")
     expect(plaintext_body).to have_content("Label Lens is ready to bring some new tunes to your ears.")
     expect(plaintext_body).to have_content("Please click the following link to log in.")
     expect(plaintext_body).to have_content("http://localhost:3000/auth/1234-5678-9101")
 
     expect(html_body).to have_content("Hey there, doot@doot.com!")
-    # expect(html_body).to include("Label Lens is ready to bring some new tunes to your ears.")
-    # expect(html_body).to include("Click here to log in. This link will expire in 10 minutes")
+    expect(html_body).to include("Label Lens is ready to bring some new tunes to your ears.")
+    expect(html_body).to include("Click here to log in. This link will expire in 10 minutes")
     assert_equal ActionMailer::Base.deliveries.count, 1
   end
 end
