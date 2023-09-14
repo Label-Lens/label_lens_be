@@ -5,7 +5,7 @@ module EmailAuth
         user: user,
         token: token,
         redirect_path: redirect_path
-      ).login_link.deliver_later
+      ).login_link.deliver_now
     end
   end
 end
