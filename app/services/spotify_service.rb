@@ -5,10 +5,8 @@ class SpotifyService
   end
 
   def self.new_releases
-    require 'pry'; binding.pry
     response = conn('browse/new-releases').get do |faraday| 
       faraday.headers['Authorization'] = Rails.application.credentials.spotify[:access_token]
-      # faraday.adapter Faraday.default_adapter
     end
   end
 

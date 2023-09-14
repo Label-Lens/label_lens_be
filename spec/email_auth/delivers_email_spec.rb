@@ -21,7 +21,7 @@ RSpec.describe 'EmailAuth::DeliversEmail' do
     #   end
     # end
 
-    let(:dummy_class_object) { dummy_class.new }
+    # let(:dummy_class_object) { dummy_class.new }
     let(:user) { create(:user) }
     let(:token) { 'abc123' }
     let(:redirect_path) { '/dashboard' }
@@ -37,8 +37,16 @@ RSpec.describe 'EmailAuth::DeliversEmail' do
     it 'sends an email with a login link' do 
 
       expect(mailer_double).to receive(:login_link).and_return(email)
-      # expect(mailer_double).to receive(:login_link).and_return(mailer_double)
-      # expect(mailer_double).to receive(:deliver_now)
+      # allow(LoginLinkMailer).to receive(:with).and_return(mailer_double)
+      expect(LoginLinkMailer).to receive(:with).with(
+        user: user,
+        token: token,
+        redirect_path: redirect_path
+      ).and_return(mailer_double)
+  
+      EmailAuth::DeliversEmail.new.deliver(user: user, token: token, redirect_path: redirect_path)
+      # expect(mailer_double).to receive(:login_link)
+      # expect(mailer_double).to receive(:deliver_now)?
       
       EmailAuth::DeliversEmail.new.deliver(
         user: user,

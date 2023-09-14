@@ -5,7 +5,7 @@ RSpec.describe 'SpotifyService' do
     describe '.conn' do 
       it "returns a Faraday object" do 
         response = SpotifyService.new_releases
-        
+
       end
     end
   end
