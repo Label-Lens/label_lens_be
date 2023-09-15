@@ -1,6 +1,7 @@
 require_relative "boot"
 
 require "rails"
+require "rspotify"
 # Pick the frameworks you want:
 require "active_model/railtie"
 require "active_job/railtie"
@@ -37,3 +38,5 @@ module LabelLensBe
     config.api_only = true
   end
 end
+#require 'pry'; binding.pry
+RSpotify::authenticate(Rails.application.credentials.spotify[:client_id], Rails.application.credentials.spotify[:client_secret])
