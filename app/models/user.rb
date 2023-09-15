@@ -1,3 +1,7 @@
 class User < ApplicationRecord
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates_presence_of :email
+  validates_presence_of :password_digest, confirmation: true
+  validates_uniqueness_of :email
+
+  has_secure_password
 end
