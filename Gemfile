@@ -49,7 +49,7 @@ group :development, :test do
 end
 
 group :development do
-  # gem "letter_opener"
+  gem "letter_opener"
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
