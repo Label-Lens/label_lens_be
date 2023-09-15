@@ -1,4 +1,4 @@
 <p> Hey there, <%= @user.email %>! </p>
 <p>Label Lens is ready to bring some new tunes to your ears. </p>
 
-<p> <a href="http://localhost:3000/auth/ <%= @uuid %>">Click here to log in. This link will expire in 10 minutes. </p>
+<p> <a href="http://localhost:5000/auth?sgid=<%= @sgid %>&email=<%= @user.email %>">Click here to log in. This link will expire in 10 minutes. </p>

@@ -1,12 +1,16 @@
 class AuthenticationMailer < ApplicationMailer
   def send_login_email 
     @user = params[:user]
-    @uuid = SecureRandom.uuid
-    time = DateTime.now
-    @user.update(login_uuid: @uuid, login_timestamp: time + 10.minutes)
+    @sgid = @user.to_sgid(expires_in: 10.minutes, for: 'login')
+    @user.update!(sgid: @sgid.to_s)
     mail(
       to: @user.email,
       subject: "The most magical login link for #{@user.email}"
     )
+  end
+
+  def welcome
+    @greeting = "Hi"
+    mail to: "Daniel.Gallagher92@gmail.com"
   end
 end

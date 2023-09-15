@@ -4,6 +4,18 @@ class SessionsController < ApplicationController
   def new 
   end
 
+  # def magic_link
+  #   sgid = params.require(:sgid)
+  
+  #   user = GlobalID::Locator.locate_signed(sgid, for: 'login')
+  
+  #   if user.nil? || !user.is_a?(User)
+  #     redirect_to root_path
+  #   else
+  #     sign_in(user)
+  #     redirect_to root_path
+  #   end
+  # end
 
 end
 # def new 
