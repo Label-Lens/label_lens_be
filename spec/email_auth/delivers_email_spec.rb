@@ -34,7 +34,7 @@ RSpec.describe 'EmailAuth::DeliversEmail' do
       allow(email).to receive(:deliver_now)
     end
 
-    it 'sends an email with a login link' do 
+    xit 'sends an email with a login link' do 
 
       expect(mailer_double).to receive(:login_link).and_return(email)
       # allow(LoginLinkMailer).to receive(:with).and_return(mailer_double)

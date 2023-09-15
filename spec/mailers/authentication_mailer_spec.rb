@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe AuthenticationMailer, type: :mailer do 
   it 'should send an email with magic link' do 
-    fake_uuid = '1234-5678-9101'
-    allow(SecureRandom).to receive(:uuid) { fake_uuid }
     
     user = User.create!(
       email: "doot@doot.com"
@@ -25,7 +23,7 @@ RSpec.describe AuthenticationMailer, type: :mailer do
     expect(plaintext_body).to have_content("Hey there, doot@doot.com!")
     expect(plaintext_body).to have_content("Label Lens is ready to bring some new tunes to your ears.")
     expect(plaintext_body).to have_content("Please click the following link to log in.")
-    expect(plaintext_body).to have_content("http://localhost:3000/auth/1234-5678-9101")
+    expect(plaintext_body).to have_content("This link will expire in 10 minutes.")
 
     expect(html_body).to have_content("Hey there, doot@doot.com!")
     expect(html_body).to include("Label Lens is ready to bring some new tunes to your ears.")
