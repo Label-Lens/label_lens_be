@@ -1,7 +1,19 @@
 class SessionsController < ApplicationController 
-  logged_out_users_welcome!
   
   def new 
+  end
+
+  def create 
+    require 'pry'; binding.pry
+    auth = request.env['omniauth.auth']
+    user = User.find_by(email: params[:email])
+    if user 
+      # session[:user_id] = user.id
+      redirect_to spotify_oa_path
+    else
+      flash[:error] = "Your email or password was incorrect."
+      redirect_to login_path
+    end
   end
 
   # def magic_link

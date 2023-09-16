@@ -40,3 +40,4 @@ module LabelLensBe
 end
 #require 'pry'; binding.pry
 RSpotify::authenticate(Rails.application.credentials.spotify[:client_id], Rails.application.credentials.spotify[:client_secret])
+config.middleware.use ActionDispatch::Session::CookieStore
