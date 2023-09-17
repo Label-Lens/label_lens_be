@@ -36,8 +36,7 @@ module LabelLensBe
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.middleware.use ActionDispatch::Session::CookieStore
   end
 end
 #require 'pry'; binding.pry
-RSpotify::authenticate(Rails.application.credentials.spotify[:client_id], Rails.application.credentials.spotify[:client_secret])
-config.middleware.use ActionDispatch::Session::CookieStore

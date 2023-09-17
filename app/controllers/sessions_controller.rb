@@ -1,15 +1,14 @@
-class SessionsController < ApplicationController 
-  
+class SessionsController < ApplicationController
+
   def new 
   end
 
   def create 
-    require 'pry'; binding.pry
-    auth = request.env['omniauth.auth']
     user = User.find_by(email: params[:email])
     if user 
-      # session[:user_id] = user.id
-      redirect_to spotify_oa_path
+      session[:user_id] = user.id
+      require 'pry'; binding.pry
+      redirect_to "http://localhost:5000/spotify_oa"
     else
       flash[:error] = "Your email or password was incorrect."
       redirect_to login_path
