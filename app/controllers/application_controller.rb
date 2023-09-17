@@ -1,4 +1,4 @@
-class ApplicationController < ActionController::API
+# class ApplicationController < ActionController::API
 
   # helper_method :current_user
 
@@ -19,4 +19,16 @@ class ApplicationController < ActionController::API
   # def self.logged_out_users_welcome!
   #   skip_before_action :require_login
   # end
+# end
+
+class ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception
+  skip_before_action :verify_authenticity_token, if: :omniauth_request?
+
+  private
+
+  def omniauth_request?
+    binding.pry
+    request.env['omniauth.strategy'].present?
+  end
 end

@@ -2,9 +2,9 @@ Rails.application.routes.draw do
 
   # match "login_emails/authenticate", to: "login_emails#authenticate", via: [:get, :post]
   # resource :login_email, only: [:new, :create]
-
-  get "/auth", to: "sessions#create"
-  post '/auth/spotify/callback', to: 'sessions#create'
+  get '/auth/spotify/callback', to: 'sessions#create'
+  post "/auth/spotify", to: "sessions#new"
+  get '/logout', to: 'sessions#destroy'
 
   resources :sessions, only: [:new]
 

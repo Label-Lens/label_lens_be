@@ -1,20 +1,30 @@
 class SessionsController < ApplicationController
 
   def new 
+
   end
 
   def create 
-    user = User.find_by(email: params[:email])
-    if user 
-      session[:user_id] = user.id
-      require 'pry'; binding.pry
-      redirect_to "http://localhost:5000/spotify_oa"
-    else
-      flash[:error] = "Your email or password was incorrect."
-      redirect_to login_path
-    end
+    # spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
+    require 'pry'; binding.pry
+    auth = request.env['omniauth.auth']
+
+    # user = User.find_by(email: params[:email])
+    # if user 
+    #   session[:user_id] = user.id
+    #   require 'pry'; binding.pry
+    #   redirect_to "http://localhost:5000/spotify_oa"
+    # else
+    #   flash[:error] = "Your email or password was incorrect."
+    #   redirect_to login_path
+    # end
   end
 
+  def destroy
+    session[:spotify_user_id] = nil
+    session[:spotify_token] = nil
+    redirect_to "http://localhost:5000/", notice: 'Logged out from Spotify'
+  end
   # def magic_link
   #   sgid = params.require(:sgid)
   
