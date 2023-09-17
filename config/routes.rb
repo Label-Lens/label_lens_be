@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   # resource :login_email, only: [:new, :create]
 
   get '/auth/spotify/callback', to: 'users#spotify'
+
+
+  get '/api/v1/search_album', to: 'api/v1/spotify#album_search'
   
   resources :sessions, only: [:new]
 
@@ -11,6 +14,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [:index]
       get "find_user", to: "users#show"
+
+
     end
   end
 end

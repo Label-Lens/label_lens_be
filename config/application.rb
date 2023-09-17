@@ -39,4 +39,4 @@ module LabelLensBe
   end
 end
 #require 'pry'; binding.pry
-RSpotify::authenticate(Rails.application.credentials.spotify[:client_id], Rails.application.credentials.spotify[:client_secret])
+#RSpotify::authenticate(Rails.application.credentials.spotify[:client_id], Rails.application.credentials.spotify[:client_secret])
