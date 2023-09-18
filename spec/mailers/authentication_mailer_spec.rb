@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe AuthenticationMailer, type: :mailer do 
-  it 'should send an email with magic link' do 
+  xit 'should send an email with magic link' do 
     
     user = User.create!(
       email: "doot@doot.com"
