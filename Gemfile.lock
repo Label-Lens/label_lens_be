@@ -172,11 +172,6 @@ GEM
     omniauth-oauth2 (1.8.0)
       oauth2 (>= 1.4, < 3)
       omniauth (~> 2.0)
-    omniauth-rails_csrf_protection (1.0.1)
-      actionpack (>= 4.2)
-      omniauth (~> 2.0)
-    omniauth-spotify (0.0.13)
-      omniauth-oauth2 (~> 1.1)
     pg (1.5.4)
     pry (0.14.2)
       coderay (~> 1.1)
@@ -299,8 +294,6 @@ DEPENDENCIES
   faraday
   jsonapi-serializer
   letter_opener
-  omniauth-rails_csrf_protection
-  omniauth-spotify
   pg (~> 1.1)
   pry
   puma (~> 5.0)

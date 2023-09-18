@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get '/auth/spotify/callback', to: 'sessions#create'
   post "/auth/spotify", to: "sessions#new"
   get '/logout', to: 'sessions#destroy'
-
+  
   resources :sessions, only: [:new]
 
   namespace :api do

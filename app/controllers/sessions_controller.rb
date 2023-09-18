@@ -5,62 +5,43 @@ class SessionsController < ApplicationController
   end
 
   def create 
-    # spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
-    require 'pry'; binding.pry
-    auth = request.env['omniauth.auth']
+    client_id = Rails.application.credentials.spotify[:client_id]
+    client_secret = Rails.application.credentials.spotify[:client_secret]
+    code = params[:code]
 
-    # user = User.find_by(email: params[:email])
-    # if user 
-    #   session[:user_id] = user.id
-    #   require 'pry'; binding.pry
-    #   redirect_to "http://localhost:5000/spotify_oa"
-    # else
-    #   flash[:error] = "Your email or password was incorrect."
-    #   redirect_to login_path
-    # end
+    conn = Faraday.new(url: 'https://accounts.spotify.com', headers: {'Accept': 'application/json'})
+
+    response = conn.post('/api/token') do |req|
+    req.params['grant_type'] = "authorization_code"
+    req.params['code'] = code
+    req.params['client_id'] = client_id
+    req.params['client_secret'] = client_secret
+    req.params['redirect_uri'] = "http://localhost:3000/auth/spotify/callback"
+    end
+
+    data = JSON.parse(response.body, symbolize_names: true)
+    access_token = data[:access_token]
+
+    conn = Faraday.new(
+      url: 'https://api.spotify.com/v1/',
+      headers: {
+        'Authorization': "Bearer #{access_token}"
+      }
+    )
+    
+    response = conn.get('me')
+    data = JSON.parse(response.body, symbolize_names: true)
+
+    user = User.find_or_create_by(uid: data[:id])
+    user.token = access_token
+    session[:user_id] = user.id
+    redirect_to "http://localhost:5000/"
   end
-
+# 'Authorization': "Basic #{base64_credentials}",
+        # 'Content-Type': "application/x-www-form-urlencoded"
   def destroy
     session[:spotify_user_id] = nil
     session[:spotify_token] = nil
     redirect_to "http://localhost:5000/", notice: 'Logged out from Spotify'
   end
-  # def magic_link
-  #   sgid = params.require(:sgid)
-  
-  #   user = GlobalID::Locator.locate_signed(sgid, for: 'login')
-  
-  #   if user.nil? || !user.is_a?(User)
-  #     redirect_to root_path
-  #   else
-  #     sign_in(user)
-  #     redirect_to root_path
-  #   end
-  # end
-
 end
-# def new 
-#   @redirect_path = params[:redirect_path]
-# end
-
-# def create 
-#   EmailAuth::EmailsLink.new.email(
-#     email: params[:email],
-#     redirect_path: params[:redirect_path]
-#   )
-#   flash[:notice] = "Check #{params[:email]} for a login link!"
-#   redirect_to login_email_path
-# end
-
-# def authenticate
-#   result = EmailAuth::ValidatesLoginAttempt.new.validate(params[:token])
-#   if result.success?
-#     reset_session
-#     session[:user.id] = result.user.id
-#     flash[:notice] = "Welcome, #{result.user.email}!"
-#     redirect_to params[:redirect_path]
-#   else
-#     flash[:error] = "We weren't able to log you in with that link. Try again?"
-#     redirect_to new_login_path(redirect_path: params[:redirect_path])
-#   end
-# end
