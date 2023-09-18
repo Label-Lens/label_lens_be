@@ -5,7 +5,7 @@ class Api::V1::SpotifyController < ApplicationController
     
     album =  params["query"]
 
-    modified_album = album.gsub(' ', '%B')
+    modified_album = album.gsub(' ', '%2B')
 
    
   end
