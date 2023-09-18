@@ -16,4 +16,8 @@ class Api::V1::UsersController < ApplicationController
     render json: UserSerializer.new(user), status: 200
   end
 
+  # def create
+  #   require 'pry'; binding.pry
+  # end
+
 end

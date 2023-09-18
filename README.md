@@ -12,7 +12,7 @@
 
 NOTE: need to add descsription. 
 
-"Label Lens" puts a spin on discovering your next favorite artist by offering users the ability to search for an album within the application, and a playlist is curated based on the selected album's record label. 
+*Label Lens* provides users with a unique listening experience and solution to the paradox of choice. Reducing the noise from too many options with apps like Spotify or YouTube -- Label Lens curates playlists by selecting albums and artists signed by the same record label as the album selected for listening. Time to tune out the chatter and tune in to your next favorite album with *Label Lens*.
 
 [Render Website]()
 Note: need to add render URL when created
@@ -25,7 +25,7 @@ need to add screenshot of schema
 
 ## Learning Goals
 
-- Consume two or more external APIs 
+- Consume one external API
 - Implement Circle CI for continuous integration/testing
 - Build APIs that return JSON responses 
 - Use an external OAuth provider to authenticate users 
@@ -52,10 +52,11 @@ need to add screenshot of schema
 - Shoulda-Matchers 
 - Factory_Bot_Rails
 - Faker
-- jsonapi-serialize
-- Figaro
+- Jsonapi-Serializer
 - Webmock
 - VCR
+- Rspotify
+- Letter_Opener
 NOTE: add gems as installed
 
 ## Setup

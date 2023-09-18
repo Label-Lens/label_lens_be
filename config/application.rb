@@ -2,6 +2,7 @@ require_relative "boot"
 
 require "rails"
 require "rspotify"
+
 # Pick the frameworks you want:
 require "active_model/railtie"
 require "active_job/railtie"
@@ -36,7 +37,10 @@ module LabelLensBe
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.session_store :cookie_store, key: '_label_lens_session'
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
   end
 end
 #require 'pry'; binding.pry
-#RSpotify::authenticate(Rails.application.credentials.spotify[:client_id], Rails.application.credentials.spotify[:client_secret])
+RSpotify::authenticate("e5b23eaa3a0a44cd9e4bc6383601b23e", "8b0fd39d33ab49ddb161850a9bf8ada7")
