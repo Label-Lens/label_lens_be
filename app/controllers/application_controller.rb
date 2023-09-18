@@ -1,16 +1,9 @@
 class ApplicationController < ActionController::API
-  # before_action :require_login
+  # protect_from_forgery with: :exception
 
-  # def require_login
-  #   @current_user = User.find_by(id: session[:user_id])
-  #   return if @current_user.present?
+  # helper_method :current_user
 
-  #   redirect_to new_login_email_path(
-  #     redirect_path: request.original_fullpath
-  #   )
-  # end
-
-  # def self.logged_out_users_welcome!
-  #   skip_before_action :require_login
-  # end
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
 end
