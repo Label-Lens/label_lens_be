@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
     user = User.find_or_create_by(uid: data[:id])
     user.token = access_token
     session[:user_id] = user.id
-    redirect_to "http://localhost:5000/"
+    redirect_to "http://localhost:5000/spotify_search"
   end
 # 'Authorization': "Basic #{base64_credentials}",
         # 'Content-Type': "application/x-www-form-urlencoded"
