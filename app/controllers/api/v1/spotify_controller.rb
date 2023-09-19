@@ -11,6 +11,9 @@ class Api::V1::SpotifyController < ApplicationController
 
     searched_album = Album.new(search[0])
 
+    
+
+    
     #Albums with the same 
     albums = RSpotify::Album.search(searched_album.label)
 
@@ -34,8 +37,14 @@ class Api::V1::SpotifyController < ApplicationController
       Album.new(album)
     end
 
-    
-    all_albums = selected_albums.unshift(searched_album)
+    filtered_albums = []
+    selected_albums.each do |album|
+      if album.label.include?(searched_album.label)
+        filtered_albums << album
+      end
+    end
+
+    all_albums = filtered_albums.unshift(searched_album)
 
     render json: AlbumsSerializer.new(all_albums)
     
