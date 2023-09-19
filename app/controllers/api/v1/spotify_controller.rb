@@ -3,16 +3,12 @@ class Api::V1::SpotifyController < ApplicationController
  
   def album_search
     
-    album_search =  params["query"]
-
+    album_search =  params["album"]
     #leverage RSpotify to return album search
     search = RSpotify::Album.search(album_search)
     #modified_album = album.gsub(' ', '+')
 
     searched_album = Album.new(search[0])
-
-    
-
     
     #Albums with the same 
     albums = RSpotify::Album.search(searched_album.label)
@@ -37,11 +33,8 @@ class Api::V1::SpotifyController < ApplicationController
       Album.new(album)
     end
 
-    filtered_albums = []
-    selected_albums.each do |album|
-      if album.label.include?(searched_album.label)
-        filtered_albums << album
-      end
+    filtered_albums = selected_albums.find_all do |album|
+      album if album.label.include?(searched_album.label)
     end
 
     all_albums = filtered_albums.unshift(searched_album)
