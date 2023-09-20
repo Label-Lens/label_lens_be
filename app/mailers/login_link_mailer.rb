@@ -1,12 +1,12 @@
-# class LoginLinkMailer < ApplicationMailer
-#   def login_link
-#     @user = params[:user]
-#     @token = params[:token]
-#     @redirect_path = params[:redirect_path]
+class LoginLinkMailer < ApplicationMailer
+  def login_link
+    @user = params[:user]
+    @token = params[:token]
+    @redirect_path = params[:redirect_path]
 
-#     mail(
-#       to: @user.email,
-#       subject: "Magic Login Link"
-#     )
-#   end
-# end
+    mail(
+      to: @user.email,
+      subject: "Magic Login Link"
+    )
+  end
+end
