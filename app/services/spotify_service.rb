@@ -10,4 +10,4 @@ class SpotifyService
     end
   end
 
-end
+end 
