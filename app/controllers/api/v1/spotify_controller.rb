@@ -3,13 +3,13 @@ class Api::V1::SpotifyController < ApplicationController
  
   def album_search
     # users search
+    artist_search = params["artist"]
+
     album_search =  params["album"]
-
-    #leverage RSpotify to return album search
-    search = RSpotify::Album.search(album_search.gsub(" ", "+"))
-
+    #leverage RSpotify to return album search with artist search included
+    search_results = RSpotify::Album.search("#{album_search} artist:#{artist_search}")  
     # get first album from search and returns poro of it
-    searched_album = Album.new(search[0])
+    searched_album = Album.new(search_results[0])
 
     #Returns ID's from albums from the label  
     album_ids = SpotifyFacade.search_by_label(searched_album.label.gsub(" ", "+"))
