@@ -2,49 +2,31 @@ class Api::V1::SpotifyController < ApplicationController
 
  
   def album_search
-    
+    # users search
     album_search =  params["album"]
+
     #leverage RSpotify to return album search
-    search = RSpotify::Album.search(album_search)
-    #modified_album = album.gsub(' ', '+')
+    search = RSpotify::Album.search(album_search.gsub(" ", "+"))
 
+    # get first album from search and returns poro of it
     searched_album = Album.new(search[0])
-    
-    #Albums with the same 
-    albums = RSpotify::Album.search(searched_album.label)
 
-    if albums.empty?
-      temp_label = label
-      while temp_label.present?
-        temp_label = temp_label.chop
-        albums = RSpotify::Album.search(temp_label)
-        
-        if albums.empty? == false
-          break
-        end
+    #Returns ID's from albums from the label  
+    album_ids = SpotifyFacade.search_by_label(searched_album.label.gsub(" ", "+"))
 
-        if temp_label.empty?
-          render json: {"error" => "No albums found"}
-        end
-      end
+    # Finds all albums associated with ID
+    albums = album_ids.map do |album_id|
+      RSpotify::Album.find(album_id)
     end
 
+    # Makes poros of albums
     selected_albums = albums.map do |album|
       Album.new(album)
     end
 
-    filtered_albums = selected_albums.find_all do |album|
-      album if album.label.include?(searched_album.label)
-    end
-
-    all_albums = filtered_albums.unshift(searched_album)
+    # Adds searched album to beginning
+    all_albums = selected_albums.unshift(searched_album)
 
     render json: AlbumsSerializer.new(all_albums)
-    
-    #Find all album information with the matching record labelq
-    # albums.each do |album| 
-    #   RSpotify::Album.find(album)
-    # end
   end
-
 end

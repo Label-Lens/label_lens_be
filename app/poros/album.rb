@@ -6,7 +6,7 @@ class Album
     @label = data.label
     @album_name = data.name
     @artist = data.artists.first.name
-    @image = data.images.last
+    @image = data.images.first
     @link = data.external_urls["spotify"]
   end
 
