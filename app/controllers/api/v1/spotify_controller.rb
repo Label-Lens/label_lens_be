@@ -1,6 +1,6 @@
 class Api::V1::SpotifyController < ApplicationController
 
-
+ 
   def album_search
     # users search
     artist_search = params["artist"]
@@ -11,10 +11,8 @@ class Api::V1::SpotifyController < ApplicationController
     # get first album from search and returns poro of it
     searched_album = Album.new(search_results[0])
 
-    searched_album = Album.new(search[0])
-    
-    #Albums with the same 
-    albums = RSpotify::Album.search(searched_album.label, offset: 8, limit: 4)
+    #Returns ID's from albums from the label  
+    album_ids = SpotifyFacade.search_by_label(searched_album.label.gsub(" ", "+"))
 
     # Finds all albums associated with ID
     albums = album_ids.map do |album_id|
