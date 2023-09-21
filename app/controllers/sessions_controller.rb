@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
     req.params['code'] = code
     req.params['client_id'] = client_id
     req.params['client_secret'] = client_secret
-    req.params['redirect_uri'] = "#{backend_url}/auth/spotify/callback"
+    req.params['redirect_uri'] = "https://label-lens-back-end.onrender.com/auth/spotify/callback"
     end
 
     data = JSON.parse(response.body, symbolize_names: true)
@@ -38,13 +38,13 @@ class SessionsController < ApplicationController
     user = User.find_or_create_by(uid: data[:id])
     user.token = access_token
     session[:user_id] = user.id
-    redirect_to "#{frontend_url}/spotify_search"
+    redirect_to "https://label-lens.onrender.com//spotify_search"
   end
 # 'Authorization': "Basic #{base64_credentials}",
         # 'Content-Type': "application/x-www-form-urlencoded"
   def destroy
     session[:spotify_user_id] = nil
     session[:spotify_token] = nil
-    redirect_to "#{frontend_url}", notice: 'Logged out from Spotify'
+    redirect_to "https://label-lens.onrender.com/", notice: 'Logged out from Spotify'
   end
 end
