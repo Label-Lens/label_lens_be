@@ -23,5 +23,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_17_224426) do
     t.string "token"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
-
 end
