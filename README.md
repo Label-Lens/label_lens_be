@@ -8,19 +8,18 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 
-## Background and Description
+## Label Lens
 
-NOTE: need to add descsription. 
+This API provides users with endpoints for seamlessly finding and creating users within a postgres database and curating playlists by searching albums and returning a list of albums produced by the same label with links to listen on Spotify.   
 
-*Label Lens* provides users with a unique listening experience and solution to the paradox of choice. Reducing the noise from too many options with apps like Spotify or YouTube -- Label Lens curates playlists by selecting albums and artists signed by the same record label as the album selected for listening. Time to tune out the chatter and tune in to your next favorite album with *Label Lens*.
+[Render Website](https://label-lens-back-end.onrender.com/)
 
-[Render Website]()
-Note: need to add render URL when created
 
 [Frontend Application](https://github.com/DavisWeimer/label_lens_fe)
 
 ## Schema 
-need to add screenshot of schema
+<img width="561" alt="Screenshot 2023-09-21 at 2 36 41 PM" src="https://github.com/Daniel-Gallagher92/label_lens_be/assets/128431917/cb9499c9-677b-4e9c-bf8e-5fab1fa92db9">
+
 
 
 ## Learning Goals
@@ -57,7 +56,6 @@ need to add screenshot of schema
 - VCR
 - Rspotify
 - Letter_Opener
-NOTE: add gems as installed
 
 ## Setup
 1. Clone this repository:
@@ -178,7 +176,7 @@ If there are any errors, verify that bundler, Rails, and your ruby environment a
 Before using the web application you will need to setup your databases locally by running the following command
 
 ```shell
-$ rails db: {:drop,:create,:migrate,:seed}
+$ rails db:{drop,create,migrate,seed}
 ```
 
 
@@ -193,15 +191,62 @@ NOTE: add route to navigate to once api is built
     
 At this point you should be taken to a page with an example JSON response for a user
 
-## Endpoints provided 
-```
-NOTE: add api endpoints as built e.g. GET /API/V1/USERS/1
-```
-### put example here 
 
-```
-NOTE: add screenshot here. cannot do screenshot within codeblock 
-```
+## **Endpoints**
+
+# GET https://label-lens-back-end.onrender.com/api/v1/users
+Find or create a user profile with a valid and unique email address. If the user's email address is not found within the database, the email provided is used to create a new user profile.  
+
+
+Postman happy request<p>
+![Screenshot 2023-09-21 at 4 17 20 PM](https://github.com/Daniel-Gallagher92/label_lens_be/assets/128431917/7e8bf3ad-e8ed-4d89-a538-46db0fde727f)
+
+Postman happy response<p>
+![Screenshot 2023-09-22 at 9 35 51 AM](https://github.com/Daniel-Gallagher92/label_lens_be/assets/128431917/332532f3-652a-4e5c-866e-3f00b516eed1)
+
+
+Postman sad request<p>
+![Screenshot 2023-09-21 at 4 29 14 PM](https://github.com/Daniel-Gallagher92/label_lens_be/assets/128431917/fa18199f-b8ac-4b43-9562-fe958ba3549d)
+
+Postman sad response<p>
+![Screenshot 2023-09-21 at 4 29 58 PM](https://github.com/Daniel-Gallagher92/label_lens_be/assets/128431917/30eb5ac1-172a-440b-af7e-b07fc155504a)
+
+
+# GET https://label-lens-back-end.onrender.com/api/v1/find_user
+Locate a user in the database by providing a user's email address in the params. 
+
+Postman happy request:<p>
+![Screenshot 2023-09-21 at 4 08 46 PM](https://github.com/Daniel-Gallagher92/label_lens_be/assets/128431917/689460a9-deb5-42e4-bd31-73a2e391ef80)
+
+Postman happy response:<p>
+![Screenshot 2023-09-21 at 4 09 12 PM](https://github.com/Daniel-Gallagher92/label_lens_be/assets/128431917/b19cb28b-c6fd-40ba-8331-24fee25d8c97)
+
+Postman sad request:<p>
+![Screenshot 2023-09-21 at 4 12 26 PM](https://github.com/Daniel-Gallagher92/label_lens_be/assets/128431917/a2071749-9675-45b9-8194-3523476749b0)
+
+Postman sad response:<p>
+![Screenshot 2023-09-21 at 4 13 55 PM](https://github.com/Daniel-Gallagher92/label_lens_be/assets/128431917/3af9c4fe-ab11-4f24-ac24-2f5ca7521632)
+
+
+# GET https://label-lens-back-end.onrender.com/api/v1/search_album
+Search for an album by providing an artist and album in the params. 
+
+Postman happy request:<p>
+![Screenshot 2023-09-21 at 5 03 59 PM](https://github.com/Daniel-Gallagher92/label_lens_be/assets/128431917/ca8d5fb1-17c1-4851-ad6a-1c253507fa8f)
+
+Postman happy response:<p>
+![Screenshot 2023-09-22 at 9 38 36 AM](https://github.com/Daniel-Gallagher92/label_lens_be/assets/128431917/60a1eb3c-4cdd-4f87-8be3-ab0b6856fefc)
+
+
+Postman sad request:<p>
+![Screenshot 2023-09-21 at 5 08 44 PM](https://github.com/Daniel-Gallagher92/label_lens_be/assets/128431917/a09ed5a2-3fbd-4315-be92-b9dfae633241)
+
+Postman sad response:<p>
+![Screenshot 2023-09-21 at 5 09 17 PM](https://github.com/Daniel-Gallagher92/label_lens_be/assets/128431917/5b007c82-e933-41c0-99e2-7669546a8936)
+
+
+
+
 
 ## **Contributors** ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
@@ -210,15 +255,15 @@ NOTE: add screenshot here. cannot do screenshot within codeblock
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/andilovetto"><img src="https://avatars.githubusercontent.com/u/128431917?s=96&v=4" width="100px;" alt=""/><br /><sub><b>Andi(she/her)</b></sub></a><br /><a href="https://github.com/Daniel-Gallagher92/label_lens_be/commits?author=andilovetto" title="Code">💻</a> <a href="https://github.com/Daniel-Gallagher92/label_lens_be/pulls?q=is%3Apr+author%3Aandilovetto" title="Reviewed Pull Requests">👀</a>
+    <td align="center"><a href="https://github.com/andilovetto"><img src="https://avatars.githubusercontent.com/u/128431917?s=96&v=4" width="100px;" alt=""/><br /><sub><b>Andi(she/her)</b></sub></a><br /><a href="https://github.com/Daniel-Gallagher92/label_lens_be/commits?author=andilovetto" title="Code">💻</a> <a href="https://github.com/Daniel-Gallagher92/label_lens_be/pulls?q=is%3Apr+author%3Aandilovetto" title="Reviewed Pull Requests">👀</a><a href="https://www.linkedin.com/in/andrea-lovetto/" title="LinkedIn">🖇️</a>
      </td>
-       <td align="center"><a href="https://github.com/ChrisAsercion"><img src="https://avatars.githubusercontent.com/u/66049544?v=4" width="100px;" alt=""/><br /><sub><b>Chris(he/him)</b></sub></a><br /><a href="https://github.com/Daniel-Gallagher92/label_lens_be/commits?author=ChrisAsercion" title="Code">💻</a> <a href="https://github.com/Daniel-Gallagher92/label_lens_be/pulls?q=is%3Apr+author%3AChrisAsercion" title="Reviewed Pull Requests">👀</a>
+       <td align="center"><a href="https://github.com/ChrisAsercion"><img src="https://avatars.githubusercontent.com/u/66049544?v=4" width="100px;" alt=""/><br /><sub><b>Chris(he/him)</b></sub></a><br /><a href="https://github.com/Daniel-Gallagher92/label_lens_be/commits?author=ChrisAsercion" title="Code">💻</a> <a href="https://github.com/Daniel-Gallagher92/label_lens_be/pulls?q=is%3Apr+author%3AChrisAsercion" title="Reviewed Pull Requests">👀</a><a href="https://www.linkedin.com/in/chris-asercion-2a7b68135/" title="LinkedIn">🖇️</a>
      </td>
-      <td align="center"><a href="https://github.com/fadwil"><img src="https://avatars.githubusercontent.com/u/128260033?v=4" width="100px;" alt=""/><br /><sub><b>Wil(he/him)</b></sub></a><br /><a href="https://github.com/Daniel-Gallagher92/label_lens_be/commits?author=fadwil" title="Code">💻</a> <a href="https://github.com/Daniel-Gallagher92/label_lens_be/pulls?q=is%3Apr+author%3Afadwil" title="Reviewed Pull Requests">👀</a>
+      <td align="center"><a href="https://github.com/fadwil"><img src="https://avatars.githubusercontent.com/u/128260033?v=4" width="100px;" alt=""/><br /><sub><b>Wil(he/him)</b></sub></a><br /><a href="https://github.com/Daniel-Gallagher92/label_lens_be/commits?author=fadwil" title="Code">💻</a> <a href="https://github.com/Daniel-Gallagher92/label_lens_be/pulls?q=is%3Apr+author%3Afadwil" title="Reviewed Pull Requests">👀</a><a href="https://www.linkedin.com/in/wilfady/" title="LinkedIn">🖇️</a>
      </td>
-      <td align="center"><a href="https://github.com/DavisWeimer"><img src="https://avatars.githubusercontent.com/u/128326999?v=4" width="100px;" alt=""/><br /><sub><b>Davis(he/him)</b></sub></a><br /><a href="https://github.com/Daniel-Gallagher92/label_lens_be/commits?author=DavisWeimer" title="Code">💻</a> <a href="https://github.com/Daniel-Gallagher92/label_lens_be/pulls?q=is%3Apr+author%3ADavisWeimer" title="Reviewed Pull Requests">👀</a>
+      <td align="center"><a href="https://github.com/DavisWeimer"><img src="https://avatars.githubusercontent.com/u/128326999?v=4" width="100px;" alt=""/><br /><sub><b>Davis(he/him)</b></sub></a><br /><a href="https://github.com/Daniel-Gallagher92/label_lens_be/commits?author=DavisWeimer" title="Code">💻</a> <a href="https://github.com/Daniel-Gallagher92/label_lens_be/pulls?q=is%3Apr+author%3ADavisWeimer" title="Reviewed Pull Requests">👀</a><a href="https://www.linkedin.com/in/davis-weimer/" title="LinkedIn">🖇️</a>
      </td>
-      <td align="center"><a href="https://github.com/Daniel-Gallagher92"><img src="https://avatars.githubusercontent.com/u/64923238?v=4" width="100px;" alt=""/><br /><sub><b>Daniel(he/him)</b></sub></a><br /><a href="https://github.com/Daniel-Gallagher92/label_lens_be/commits?author=Daniel-Gallagher92" title="Code">💻</a> <a href="https://github.com/Daniel-Gallagher92/label_lens_be/pulls?q=is%3Apr+author%3ADaniel-Gallagher92" title="Reviewed Pull Requests">👀</a>
+      <td align="center"><a href="https://github.com/Daniel-Gallagher92"><img src="https://avatars.githubusercontent.com/u/64923238?v=4" width="100px;" alt=""/><br /><sub><b>Daniel(he/him)</b></sub></a><br /><a href="https://github.com/Daniel-Gallagher92/label_lens_be/commits?author=Daniel-Gallagher92" title="Code">💻</a> <a href="https://github.com/Daniel-Gallagher92/label_lens_be/pulls?q=is%3Apr+author%3ADaniel-Gallagher92" title="Reviewed Pull Requests">👀</a><a href="https://www.linkedin.com/in/daniel-gallagher-5b29271a1/" title="LinkedIn">🖇️</a>
      </td>
     </tr>
 </table>
