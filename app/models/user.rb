@@ -1,6 +1,5 @@
 class User < ApplicationRecord
   # validates_presence_of :email
+  # validates_format_of :email, with: URI::MailTo::EMAIL_REGEXP
   # validates_uniqueness_of :email
-  # validates :email, absence: { message: "can't be nil" }, unless: -> { email.nil? }
-  # validates :sgid, absence: { message: "can't be nil" }, unless: -> { sgid.nil? }
 end
